@@ -1,6 +1,4 @@
-# csv_hasher
-
-CSV Hasher
+# CSV Hasher
 
 This is a useful utility to return arrays of hashes of a CSV input file instead of arrays of arrays supported by the CSV class of Ruby. 
 
