@@ -1,13 +1,15 @@
-Gem::Specification.new do |s|
-  s.name        = 'csv_hasher'
-  s.version     = '0.0.0'
-  s.date        = '2015-05-23'
-  s.summary     = "CSV Hasher"
-  s.description = "A simple gem to return arrays of hashes for a CSV file"
-  s.authors     = ["Gaurav Singha Roy"]
-  s.email       = 'neogauravsvnit@gmail.com'
-  s.files       = ["lib/csv_hasher.rb"]
-  s.homepage    =
+Gem::Specification.new do |spec|
+  spec.name        = 'csv_hasher'
+  spec.version     = '0.0.0'
+  spec.date        = '2015-05-23'
+  spec.summary     = "CSV Hasher"
+  spec.description = "A simple gem to return arrays of hashes for a CSV file"
+  spec.authors     = ["Gaurav Singha Roy"]
+  spec.email       = 'neogauravsvnit@gmail.com'
+  spec.files       = ["lib/csv_hasher.rb"]
+  spec.homepage    =
     'http://rubygems.org/gems/csv_hasher'
-  s.license       = 'MIT'
+  spec.license       = 'MIT'
+  
+  spec.add_development_dependency "rspec"
 end
