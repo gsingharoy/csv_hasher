@@ -2,8 +2,16 @@ require 'csv'
 
 class CSVHasher
 
-  # This method will return arrays of hashes for the CSV rows
-  # The keys for the hashes can also be passed in the order it should appear
+  # get arrays of hashes from a CSV file instead of arrays of arrays
+  #
+  # Example:
+  #   >> CSVHasher.hashify('path/to/csv/file')
+  #   => [{:col_1=> '..', :col_2=> '..'},...]
+  #   
+  #
+  # Arguments:
+  #   path_to_csv: (String)
+  #   options: (Hash)
   def self.hashify(path_to_csv, options = {}) 
     csv_arrs = CSV.read(path_to_csv)
     keys = options[:keys] || col_keys(csv_arrs[0])
