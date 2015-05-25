@@ -4,7 +4,7 @@ class CSVHasher
 
   # This method will return arrays of hashes for the CSV rows
   # The keys for the hashes can also be passed in the order it should appear
-  def self.hashify(path_to_csv, options = {})
+  def self.hashify(path_to_csv, options = {}) 
     csv_arrs = CSV.read(path_to_csv)
     keys = options[:keys] || col_keys(csv_arrs[0])
     start_index = options[:keys].nil? || options[:include_headers] ? 1 : 0 
@@ -19,4 +19,5 @@ class CSVHasher
   end
 
 end
+
 
