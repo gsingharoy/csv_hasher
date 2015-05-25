@@ -1,4 +1,4 @@
-# CSV Hasher [![Gem Version](https://badge.fury.io/rb/csv_hasher.svg)](http://badge.fury.io/rb/csv_hasher)
+# CSV Hasher   [![Build Status](https://travis-ci.org/gsingharoy/csv_hasher.svg?branch=master)](https://travis-ci.org/gsingharoy/csv_hasher)  [![Gem Version](https://badge.fury.io/rb/csv_hasher.svg)](http://badge.fury.io/rb/csv_hasher)
 
 This is a useful utility to return arrays of hashes of a CSV input file instead of arrays of arrays supported by the CSV class of Ruby. 
 
