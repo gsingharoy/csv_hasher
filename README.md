@@ -16,7 +16,13 @@ require 'csv_hasher'
 arr_of_hashes = CSVHasher.hashify('path/to/csv/file')
 ```
 
-By default the header column names are converted to keys of the hashes. If you want your own keys then pass the keys as a parameter
+By default the header column names are converted to keys of the hashes. These keys are Ruby Symbols spider cased. If you want the header values to remain as key Strings then use
+
+```shell
+arr_of_hashes = CSVHasher.hashify('path/to/csv/file', { original_col_as_keys: true })
+```
+
+If you want your own keys then pass your keys as a parameter.
 
 ```shell
 arr_of_hashes = CSVHasher.hashify('path/to/csv/file', { keys: custom_keys })
