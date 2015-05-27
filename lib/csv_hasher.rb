@@ -20,16 +20,23 @@ class CSVHasher
   #
   def self.hashify(path_to_csv, options = { original_col_as_keys: false })
     csv_arrs = CSV.read(path_to_csv)
-    if options[:original_col_as_keys]
-      keys = csv_arrs[0]
-    else
-      keys = options[:keys] || col_keys(csv_arrs[0])
-    end
+    keys = csv_keys options, csv_arrs
     start_index = options[:keys].nil? || options[:include_headers] ? 1 : 0
     csv_arrs[start_index..-1].map {|a| Hash[keys.zip(a)] }
   end
 
   private
+
+  #This method gets the csv_keys based on the options and csv_arrs
+  def self.csv_keys(options, csv_arrs)
+    if options[:keys]
+      options[:keys]
+    elsif options[:original_col_as_keys]
+      csv_arrs[0]
+    else
+      col_keys(csv_arrs[0])
+    end
+  end
 
   # this method converts the header of the CSV into an array of sym keys
   def self.col_keys(keys)

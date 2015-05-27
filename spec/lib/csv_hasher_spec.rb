@@ -9,11 +9,7 @@ describe CSVHasher do
       end
     end
     context 'when file exists' do
-      let(:sample1_path) { File.join(
-                              File.expand_path(File.dirname(__FILE__)),
-                              '..',
-                              'fixtures',
-                              'sample1.csv') }
+      let(:sample1_path) { csv_file_path(:sample1) }
       context 'sample1.csv file' do
         before do
           @header_keys = [:col_1, :col_2, :col_3]
@@ -94,5 +90,83 @@ describe CSVHasher do
         expect(CSVHasher.send(:col_keys, msg)).to eq expected_response
       end
     end
+  end
+
+  describe '::csv_keys' do
+    before do
+      @csv_arr = CSV.read csv_file_path(:sample1)
+    end
+    context 'original_col_as_keys' do
+      context 'when it is true' do
+        it 'returns the header names as it is for keys' do
+          options = { original_col_as_keys: true }
+          expect(
+            CSVHasher.csv_keys(options, @csv_arr)
+          ).to eq col_headers(:sample1, :original)
+        end
+      end
+      context 'when it is false' do
+        it 'returns the header names as symbols' do
+          options = { original_col_as_keys: false }
+          expect(
+            CSVHasher.csv_keys(options, @csv_arr)
+          ).to eq col_headers(:sample1, :symboled)
+        end
+      end
+      context 'when it is nil' do
+        it 'returns the header names as symbols' do
+          options = {}
+          expect(
+            CSVHasher.csv_keys(options, @csv_arr)
+          ).to eq col_headers(:sample1, :symboled)
+        end
+      end
+    end
+    context 'keys' do
+      context 'when it is nil' do
+        it 'returns the header names as symbols' do
+          options = {}
+          expect(
+            CSVHasher.csv_keys(options, @csv_arr)
+          ).to eq col_headers(:sample1, :symboled)
+        end
+      end
+      context 'when it has an array' do
+        it 'returns the passed array' do
+          keys = [1, 'col 2', :col_3]
+          options = { keys: keys }
+          expect(
+            CSVHasher.csv_keys(options, @csv_arr)
+          ).to eq keys
+        end
+      end
+      context 'when it has an array and original_col_as_keys is true' do
+        it 'returns the passed array' do
+          keys = [1, 'col 2', :col_3]
+          options = { keys: keys, original_col_as_keys: true }
+          expect(
+            CSVHasher.csv_keys(options, @csv_arr)
+          ).to eq keys
+        end
+      end
+    end
+  end
+
+  def col_headers(file_name = :sample1, type = :original)
+    if file_name == :sample1
+      if type == :original
+        ['col 1', 'col 2', 'col 3']
+      else
+        [:col_1, :col_2, :col_3]
+      end
+    end
+  end
+
+  def csv_file_path(file_name = :sample1)
+    File.join(
+    File.expand_path(File.dirname(__FILE__)),
+    '..',
+    'fixtures',
+    "#{file_name.to_s}.csv")
   end
 end
